@@ -101,7 +101,7 @@ class NoteForm(forms.ModelForm):
         max_length=500,
         widget=forms.Textarea(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Add a note",
                 "title": "Note",
                 "rows": 4,

@@ -3,7 +3,8 @@
 {% block content %}
 
 <div class="container my-5">
-  <div class="mx-auto" style="width: 800px">
+
+  <div class="mx-auto" style="width: 800px;">
     <!-- {% if messages %}
     {% for message in messages %}
     <p class="text-success">{{message}}</p>
@@ -29,13 +30,13 @@
       <p>{{ form.username }}</p>
       <p>{{ form.password }}</p>
 
-      <input class="btn btn-dark" type="submit" value="Login">
-      <input type="hidden" name="next" value="{% if next == '/accounts/logout' %}/{% else %}{{next}}{% endif %}">
+      <input class="btn btn-dark" type="submit" value="Login"/>
+      <input type="hidden" name="next" value="{% if next == '/accounts/logout' %}/{% else %}{{next}}{% endif %}"/>
     </form>
 
     {# Assumes you set up the password_reset view in your URLconf #}
     <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
-    {% endblock %}
   </div>
 </div>
+{% endblock %}
