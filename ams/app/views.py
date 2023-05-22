@@ -155,7 +155,8 @@ def edit_note(request, id):
         form = NoteForm(request.POST)
         if form.is_valid():
             new_text = form.cleaned_data["text"]
-            noteQueryObject.update(text=new_text)
+            new_created_at = datetime.datetime.now()
+            noteQueryObject.update(text=new_text, created_at=new_created_at)
             return redirect("notes", entry.id)
     else:
         form = None
@@ -221,12 +222,16 @@ def create(request):
 def search(request):
     if "query" in request.GET:
         query = request.GET["query"]
+        print(request.user)
         search_results = Entry.objects.filter(
-            Q(name__icontains=query)
-            | Q(common_name__icontains=query)
-            | Q(species__icontains=query)
-            | Q(sex__iexact=query)
-            | Q(date_acquired__icontains=query)
+            Q(owner=request.user)
+            & (
+                Q(name__icontains=query)
+                | Q(common_name__icontains=query)
+                | Q(species__icontains=query)
+                | Q(sex__iexact=query)
+                | Q(date_acquired__icontains=query)
+            )
         )
         return render(request, "search.html", {"entries": search_results})
 
@@ -309,6 +314,7 @@ def delete_schedule(request, id):
         entry = Entry.objects.filter(owner=request.user).get(pk=id)
         feeding_schedule = FeedingSchedule.objects.get(belongs_to=entry)
         feeding_schedule.delete()
+        messages.success(request, "Feeding schedule has been deleted")
     except:
         print("Schedule not found")
     return redirect("entry", id=id)

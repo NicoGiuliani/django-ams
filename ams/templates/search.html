@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load static thumbnail %}
 
 {% block content %}
 <style>
@@ -42,11 +42,17 @@
       <td>{{entry.common_name}}</td>
       <td>{{entry.species}}</td>
       <td>
-      {% thumbnail entry.photo "500x500" crop="center" as im %}
+      {% if entry.photo %}
+        {% thumbnail entry.photo "500x500" crop="center" as im %}
         <a href="{% url 'entry' entry.id %}">
           <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
         </a>
-      {% endthumbnail %}
+        {% endthumbnail %}
+      {% else %}
+        <a href="{% url 'entry' entry.id %}">
+          <img class="zoom rounded" height="100px" width="100px" src="{% static 'images/default.jpg' %}" alt="" />
+        </a>
+      {% endif %}
       </td>
       <td>
         <div class="menu_options d-flex flex-row gap-3">

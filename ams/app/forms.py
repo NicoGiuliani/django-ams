@@ -250,7 +250,7 @@ class RegistrationForm(UserCreationForm):
 class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
         super(UserPasswordResetForm, self).__init__(*args, **kwargs)
-        print("here it is")
+        print("password reset form")
 
     email = forms.EmailField(
         label="",
@@ -268,7 +268,7 @@ class UserPasswordResetForm(PasswordResetForm):
 class UserSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(UserSetPasswordForm, self).__init__(*args, **kwargs)
-        print("hoooooo")
+        print("new password form")
 
     new_password1 = forms.CharField(
         label="",
