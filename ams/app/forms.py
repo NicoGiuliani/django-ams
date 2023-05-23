@@ -22,7 +22,6 @@ class CreateForm(forms.ModelForm):
             attrs={"class": "form-control", "placeholder": "Name", "title": "Name"}
         ),
         label="",
-        required=False,
     )
     common_name = forms.CharField(
         max_length=50,
@@ -47,11 +46,15 @@ class CreateForm(forms.ModelForm):
         label="",
     )
     sex = forms.ChoiceField(
-        choices=(("MALE", "Male"), ("FEMALE", "Female"), ("UNKNOWN", "Unknown")),
-        widget=forms.RadioSelect(
-            attrs={"class": "d-inline-flex gap-5", "title": "Sex"}
+        choices=(
+            ("", "Sex"),
+            ("MALE", "Male"),
+            ("FEMALE", "Female"),
+            ("UNKNOWN", "Unknown"),
         ),
+        widget=forms.Select(attrs={"class": "form-control", "title": "Sex"}),
         label="",
+        required=True,
     )
     date_acquired = forms.DateField(
         widget=forms.DateInput(

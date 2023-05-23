@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 {% load static thumbnail %}
 {% block content %}
-<div class="container my-5 d-flex flex-column text-center">
+<style>
+  @media (max-width: 524px) {
+      .photo {
+        width: 351px;
+      }
+      .back-btn {
+        display: none !important;
+      }
+    }
+  
+    @media (max-width: 280px) {
+      .photo {
+        width: 256px;
+      }
+    }
+  </style>
+
+
+<div class="container d-flex flex-column text-center">
+  <div class="w-100 back-btn">
+    <a href="{% url 'entry' entry.id %}" class="btn btn-light py-2 my-1">Back</a>
+  </div>
+
   <div class="delete-preview mb-5">
-    <h1>{{entry.name}}</h1>
+    <h1 class="my-2">{{entry.name}}</h1>
     {% if entry.photo %}
       {% thumbnail entry.photo "500x500" crop="center" as im %}
-      <img class="rounded" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
+      <img class="rounded photo" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
       {% endthumbnail %}
       {% else %}
-      <img class="rounded" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
+      <img class="rounded photo" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
     {% endif %}
   </div>
   <form method="POST">
@@ -18,6 +40,5 @@
     <a href="{% url 'home' %}" class="btn btn-dark">Cancel</a>
     <input class="btn btn-danger" type="submit" value="Delete"/>
   </form>
-  <a href="{% url 'entry' entry.id %}" class="btn btn-light" style="position: absolute; top: 108px; left: 20px">Back</a>
 </div>
 {% endblock %}

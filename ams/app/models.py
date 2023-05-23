@@ -5,6 +5,12 @@ from django.utils.html import mark_safe
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 
+SEXES = (
+    ("MALE", "Male"),
+    ("FEMALE", "Female"),
+    ("UNKNOWN", "Unknown"),
+)
+
 
 class Entry(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -13,7 +19,7 @@ class Entry(models.Model):
     name = models.CharField(max_length=50)
     common_name = models.CharField(max_length=50)
     species = models.CharField(max_length=100)
-    sex = models.CharField(max_length=10)
+    sex = models.CharField(max_length=10, choices=SEXES)
     date_acquired = models.DateField()
     acquired_from = models.CharField(max_length=100)
     photo = ImageField(upload_to="images/", blank=True, null=True)

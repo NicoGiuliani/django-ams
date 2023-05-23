@@ -2,7 +2,15 @@
 {% load static %}
 {% block content %}
 
-<div class="w-100">
+<style>
+    @media (max-width: 524px) {
+    .back-btn {
+      display: none !important;
+    }
+  }
+</style>
+
+<div class="w-100 back-btn">
   <a href="{% url 'entry' entry.id %}" class="btn btn-light mt-3 ms-3">Back</a>
 </div>
 
@@ -12,7 +20,7 @@
   <p class="text-success">{{message}}</p>
   {% endfor %}
   {% endif %}
-  <h1>Feeding schedule for {{entry.name}}</h1>
+  <h1 class="my-2">Feeding schedule for {{entry.name}}</h1>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
