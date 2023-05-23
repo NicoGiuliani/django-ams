@@ -11,16 +11,16 @@
     .content {
     flex-direction: column; 
     /* justify-content: space-between; */
-  }
-  .info {
-    padding: 0 !important;
-  }
-  .photo {
-    margin: 0 auto;
-  }
-  .menu_options {
-    width: fit-content;
-  }
+    }
+    .info {
+      padding: 0 !important;
+    }
+    .photo {
+      margin: 0 auto;
+    }
+    .menu_options {
+      width: fit-content;
+    }
   }
 
   @media (max-width: 524px) {
@@ -45,13 +45,13 @@
   }
 </style>
 
-<div class="w-100 back-btn">
+<!-- <div class="w-100 back-btn">
   <a href="{% url 'home' %}" class="btn btn-light mt-3 ms-3">Back</a>
-</div>
-<div class="container">
+</div> -->
+<div class="container my-3">
   {% if messages %}
   {% for message in messages %}
-  <p class="text-success">{{message}}</p>
+  <p class="my-2 text-success">{{message}}</p>
   {% endfor %}
   {% endif %}
   <h1 class="my-2">{{entry.name}}</h1>
@@ -63,8 +63,7 @@
       <img class="photo rounded" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
       {% endthumbnail %}
       {% else %}
-      <!-- <h1>No photo</h1> -->
-      <img class="rounded" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
+      <img class="photo rounded" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
       {% endif %} 
       <table class="table w-100">
         <tbody>
@@ -137,20 +136,6 @@
       </table>
     </div>
   </div>
-
-
-  
-
-  <!-- can row up the first few previews from the gallery -->
-  <!-- <div class="additional_photos">
-    {% thumbnail entry.photo "100x100" crop="center" as im %}
-    <img class="rounded" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
-    {% endthumbnail %}
-  </div> -->
-
-  <!-- <video class="rounded" width="320" controls>
-    <source src="{{MEDIA_URL}}{{entry.video}}" type="video/mp4" />
-  </video> -->
 
 </div>
 

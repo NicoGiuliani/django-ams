@@ -5,7 +5,7 @@
   <div class="mx-auto" style="width: 800px">
     {% if messages %}
     {% for message in messages %}
-    <p class="text-success">{{message}}</p>
+    <p class="my-2 text-success">{{message}}</p>
     {% endfor %}
     {% endif %}
 
@@ -27,6 +27,6 @@
     </form>
   </div>
 </div>
-<a href="{% url 'home' %}" class="btn btn-light" style="position:absolute;top:108px;left:20px">Back</a>
+<!-- <a href="{% url 'home' %}" class="btn btn-light" style="position:absolute;top:108px;left:20px">Back</a> -->
 
 {% endblock %}

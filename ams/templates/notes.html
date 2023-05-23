@@ -3,6 +3,32 @@
 {% block content %}
 
 <style>
+  .content {
+    /* display: flex;
+      flex-direction: row;  */
+      /* justify-content: space-between; */
+    }
+
+  .small {
+    display: none;
+  }
+
+  @media (max-width: 992px) {
+    .content {
+    flex-direction: column; 
+    /* justify-content: space-between; */
+    }
+    .info {
+      padding: 0 !important;
+    }
+    .photo {
+      margin: 0 auto;
+    }
+    .menu_options {
+      width: fit-content;
+    }
+  }
+
   @media (max-width: 524px) {
       .back-btn {
         display: none !important;
@@ -10,25 +36,34 @@
     }
   
     @media (max-width: 280px) {
-      
+      .large {
+        display: none;
+      }
+      .menu_options {
+        flex-direction: column !important;
+      }
+      .small {
+        display: block;
+      }
     }
   </style>
 
-<div class="w-100 back-btn">
+<!-- <div class="w-100 back-btn">
   <a href="{% url 'entry' entry.id %}" class="btn btn-light mt-3 ms-3">Back</a>
-</div>
-<div class="container">
+</div> -->
+<div class="container my-3">
   {% if messages %}
   {% for message in messages %}
-  <p class="text-success">{{message}}</p>
+  <p class="my-2 text-success">{{message}}</p>
   {% endfor %}
   {% endif %}
   <h1 class="my-2">Notes for {{entry.name}}</h1>
-  <div class="d-flex flex-row gap-5">
-    <div class="col-8">
+  <div class="content d-inline-flex gap-2 w-100">
+    <a href="#edit_note" class="small btn btn-dark">Add new note</a>
+    <div class="col-sm-12 col-md-8">
       <table class="table table-hover">
-        <thead>
-          <tr">
+        <thead class="large">
+          <tr>
             <th scope="col">Note</th>
             <th scope="col">Created at (UTC)</th>
             <th scope="col">Options</th>
@@ -41,12 +76,12 @@
             <td class="col-7">
               {{note.text}}
             </td>
-            <td class="col-4">
+            <td class="large col-4">
               {{note.created_at}}
             </td>
             <td class="col-1">
               <div class="menu_options d-flex flex-row gap-3">
-                <a href="{% url 'edit_note' note.id %}" title="Edit this note">
+                <a href="{% url 'edit_note' note.id %}?#edit_note" title="Edit this note">
                   <i class="fa-regular fa-pen-to-square text-secondary"></i>
                 </a>
                 <a href="{% url 'delete_note' note.id %}">
@@ -55,13 +90,14 @@
               </div>
             </td>
           </tr>
+
           {% endfor %}
           {% endif %}
         </tbody>
       </table>
     </div>
-    <div class="col-4">
-      <form method="POST" enctype="multipart/form-data">
+    <div class="col-sm-12 col-md-4 mb-5">
+      <form id="edit_note" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         

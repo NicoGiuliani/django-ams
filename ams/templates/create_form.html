@@ -9,24 +9,24 @@
 }
 </style>
 
-<div class="container">
+<!-- <div class="w-100 back-btn">
+  {% if id %}
+  <a href="{% url 'entry' id %}" class="btn btn-light mt-3 ms-3">Back</a>
+  {% else %}
+  <a href="{% url 'home' %}" class="btn btn-light mt-3 ms-3">Back</a>
+  {% endif %}
+</div> -->
+<div class="container my-3">
   
-  <div class="w-100 back-btn">
-    {% if id %}
-    <a href="{% url 'entry' id %}" class="btn btn-light py-2 my-1">Back</a>
-    {% else %}
-    <a href="{% url 'home' %}" class="btn btn-light py-2 my-1">Back</a>
-    {% endif %}
-  </div>
 
   {% if messages %}
   {% for message in messages %}
-  <p class="text-success">{{message}}</p>
+  <p class="my-2 text-success">{{message}}</p>
   {% endfor %}
   {% endif %}
   <h1 class="my-2">Basic information</h1>
 
-  <form method="POST" enctype="multipart/form-data" class="mb-3">
+  <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input class="btn btn-dark my-1" type="submit" value="Submit" />

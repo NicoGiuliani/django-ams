@@ -19,7 +19,11 @@ class CreateForm(forms.ModelForm):
     name = forms.CharField(
         max_length=50,
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Name", "title": "Name"}
+            attrs={
+                "class": "form-control rounded",
+                "placeholder": "Name",
+                "title": "Name",
+            }
         ),
         label="",
     )
@@ -27,7 +31,7 @@ class CreateForm(forms.ModelForm):
         max_length=50,
         widget=forms.TextInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Common name",
                 "title": "Common name",
             }
@@ -38,7 +42,7 @@ class CreateForm(forms.ModelForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Species",
                 "title": "Species",
             }
@@ -52,7 +56,7 @@ class CreateForm(forms.ModelForm):
             ("FEMALE", "Female"),
             ("UNKNOWN", "Unknown"),
         ),
-        widget=forms.Select(attrs={"class": "form-control", "title": "Sex"}),
+        widget=forms.Select(attrs={"class": "form-control rounded", "title": "Sex"}),
         label="",
         required=True,
     )
@@ -60,7 +64,7 @@ class CreateForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 "type": "text",
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Date acquired",
                 "onfocus": "(this.type='date')",
                 "onblur": "if (this.value === '') { (this.type='text') }",
@@ -73,7 +77,7 @@ class CreateForm(forms.ModelForm):
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Acquired from",
                 "title": "Acquired from",
             }
@@ -81,7 +85,7 @@ class CreateForm(forms.ModelForm):
         label="",
     )
     photo = forms.ImageField(
-        widget=forms.FileInput(attrs={"class": "form-control"}),
+        widget=forms.FileInput(attrs={"class": "form-control rounded"}),
         label="",
         required=False,
     )
@@ -126,7 +130,7 @@ class ScheduleForm(forms.ModelForm):
         max_length=50,
         widget=forms.TextInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Food type",
                 "title": "Food Type",
             }
@@ -137,7 +141,7 @@ class ScheduleForm(forms.ModelForm):
     food_quantity = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Food quantity",
                 "title": "Food quantity",
             }
@@ -149,7 +153,7 @@ class ScheduleForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 "type": "text",
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Last fed date",
                 "onfocus": "(this.type='date')",
                 "onblur": "if (this.value === '') { (this.type='text') }",
@@ -162,7 +166,7 @@ class ScheduleForm(forms.ModelForm):
     feed_interval = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Feed interval",
                 "title": "Feed interval",
             }
@@ -174,7 +178,7 @@ class ScheduleForm(forms.ModelForm):
         widget=forms.DateInput(
             attrs={
                 "type": "text",
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Next feed date (optional)",
                 "onfocus": "(this.type='date')",
                 "onblur": "if (this.value === '') { (this.type='text') }",
@@ -203,13 +207,15 @@ class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Username",
             }
         )
     )
     password = forms.CharField(
-        widget=PasswordInput(attrs={"class": "form-control", "placeholder": "Password"})
+        widget=PasswordInput(
+            attrs={"class": "form-control rounded", "placeholder": "Password"}
+        )
     )
 
 
@@ -259,7 +265,7 @@ class UserPasswordResetForm(PasswordResetForm):
         label="",
         widget=forms.EmailInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "Email",
                 "type": "email",
                 "name": "email",
@@ -277,7 +283,7 @@ class UserSetPasswordForm(SetPasswordForm):
         label="",
         widget=forms.PasswordInput(
             attrs={
-                "class": "form-control",
+                "class": "form-control rounded",
                 "placeholder": "New password",
                 "type": "password",
                 "name": "password1",

@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.models import auth, User
 from django.contrib.auth import authenticate, login
 from django.db.models import Q
+from django.urls import reverse
 from .models import Entry, FeedingSchedule, Note
 from .forms import CreateForm, NoteForm, ScheduleForm, RegistrationForm
 from django.contrib.auth.decorators import login_required
@@ -101,7 +102,7 @@ def edit(request, id):
             if form.is_valid():
                 print("IT'S VALID")
                 form.save()
-                return redirect("home")
+                return redirect("entry", id)
         else:
             form = CreateForm(
                 instance=entry,
@@ -269,6 +270,7 @@ def schedule(request, id):
                     feed_interval=new_feed_interval,
                     next_feed_date=new_next_feed_date,
                 )
+                messages.success(request, "Schedule has been updated")
                 print("updated")
             else:
                 new_feeding_schedule = FeedingSchedule(
@@ -310,20 +312,22 @@ def schedule(request, id):
 
 @login_required
 def delete_schedule(request, id):
-    try:
-        entry = Entry.objects.filter(owner=request.user).get(pk=id)
-        feeding_schedule = FeedingSchedule.objects.get(belongs_to=entry)
-        feeding_schedule.delete()
-        messages.success(request, "Feeding schedule has been deleted")
-    except:
-        print("Schedule not found")
-    return redirect("entry", id=id)
+    entry = Entry.objects.filter(owner=request.user).get(pk=id)
+    if request.method == "POST":
+        try:
+            feeding_schedule = FeedingSchedule.objects.get(belongs_to=entry)
+            feeding_schedule.delete()
+            messages.success(request, "Feeding schedule has been deleted")
+        except:
+            print("Schedule not found")
+        return redirect("entry", id=id)
+    else:
+        return render(request, "delete_schedule.html", {"entry": entry})
 
 
 @login_required
 def custom_logout(request):
     logout(request)
-    messages.info(request, "Logged out successfully!")
     return redirect("login")
 
 
