@@ -14,6 +14,24 @@
   .link {
     padding: 15px;
   }
+
+  @media (max-width: 992px) {
+    .test {
+      display: none
+    }
+  }
+
+  @media (max-width: 642px) {
+    .additional_fields {
+      display: none;
+    }
+  }
+
+  @media (max-width: 352px) { 
+    .species {
+      display: none;
+    }
+  }
 </style>
 {% if messages %}
 {% for message in messages %}
@@ -26,10 +44,10 @@
   <thead>
     <tr class="table">
       <th scope="col">Name</th>
-      <th scope="col">Species</th>
-      <th scope="col">Scientific Name</th>
+      <th scope="col" class="species">Species</th>
+      <th scope="col" class="additional_fields">Scientific Name</th>
       <th scope="col">Photo</th>
-      <th scope="col">Options</th>
+      <th scope="col" class="additional_fields">Options</th>
     </tr>
   </thead>
 
@@ -42,8 +60,8 @@
         {{entry.name}}
         </a>
       </th>
-      <td>{{entry.common_name}}</td>
-      <td>{{entry.species}}</td>
+      <td class="species">{{entry.common_name}}</td>
+      <td class="additional_fields">{{entry.species}}</td>
       <td>
       
       {% if entry.photo %}
@@ -58,7 +76,7 @@
         </a>
       {% endif %}
       </td>
-      <td>
+      <td class="additional_fields">
         <div class="menu_options d-flex flex-row gap-3">
           <a href="{% url 'edit' entry.id %}" title="Edit basic information">
             <i class="fa-regular fa-pen-to-square text-secondary"></i>
