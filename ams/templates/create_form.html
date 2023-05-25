@@ -1,22 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="container my-3">
-  {% if messages %}
-  {% for message in messages %}
-  <p class="my-2 text-success">{{message}}</p>
-  {% endfor %}
-  {% endif %}
-  <h1 class="my-2">Basic information</h1>
-
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-dark my-1" type="submit" value="Submit" />
-    {% if hasPhoto %}
-    <a href="{% url 'delete_photo' id %}" class="btn btn-warning my-1">Delete Photo</a>
+  <div class="container my-3">
+    {% if messages %}
+      {% for message in messages %}<p class="my-2 text-success">{{ message }}</p>{% endfor %}
     {% endif %}
-  </form>
-
-</div>
+    <h1 class="my-2">Basic information</h1>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn btn-dark my-1" type="submit" value="Submit" />
+      {% if hasPhoto %}
+        <a href="{% url 'delete_photo' id %}" class="btn btn-warning my-1">Delete Photo</a>
+      {% endif %}
+    </form>
+  </div>
 {% endblock %}

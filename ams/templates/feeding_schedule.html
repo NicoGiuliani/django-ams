@@ -1,21 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-<div class="container my-3">
-  {% if messages %}
-  {% for message in messages %}
-  <p class="my-2 text-success">{{message}}</p>
-  {% endfor %}
-  {% endif %}
-  <h1 class="my-2">Feeding schedule for {{entry.name}}</h1>
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn btn-dark" type="submit" value="Submit"/>
-    {% if form.food_type.value is not None %}
-    <a href='{% url "delete_schedule" entry.id %}' class="btn btn-danger">Delete</a>
+  <div class="container my-3">
+    {% if messages %}
+      {% for message in messages %}<p class="my-2 text-success">{{ message }}</p>{% endfor %}
     {% endif %}
-  </form>
-</div>
+    <h1 class="my-2">Feeding schedule for {{ entry.name }}</h1>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn btn-dark" type="submit" value="Submit" />
+      {% if form.food_type.value is not None %}
+        <a href='{% url "delete_schedule" entry.id %}' class="btn btn-danger">Delete</a>
+      {% endif %}
+    </form>
+  </div>
 {% endblock %}

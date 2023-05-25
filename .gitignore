@@ -5,3 +5,4 @@ ams/ams/__pycache__
 ams/app/__pycache__
 venv
 sent_emails
+.djlintrc

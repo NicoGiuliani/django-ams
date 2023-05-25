@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 {% load static thumbnail %}
 {% block content %}
-
-<div class="container">
-  {% if messages %}
-  {% for message in messages %}
-  <p class="my-2 text-success">{{message}}</p>
-  {% endfor %}
-  {% endif %}
-  <h1>404: Page not found</h1>
-</div>
-
+  <div class="container">
+    {% if messages %}
+      {% for message in messages %}<p class="my-2 text-success">{{ message }}</p>{% endfor %}
+    {% endif %}
+    <h1>404: Page not found</h1>
+  </div>
 {% endblock %}

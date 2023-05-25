@@ -1,33 +1,31 @@
 {% extends "base.html" %}
-
 {% block content %}
-
-<div class="container my-3">
-  <div class="mx-auto">
-    <h1>Login</h1>
-    {% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-
-    {% if next %}
+  <div class="container my-3">
+    <div class="mx-auto">
+      <h1>Login</h1>
+      {% if form.errors %}<p>Your username and password didn't match. Please try again.</p>{% endif %}
+      {% if next %}
         {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
+          <p>
+            Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.
+          </p>
         {% else %}
-        <p>Please login to see this page.</p>
+          <p>Please login to see this page.</p>
         {% endif %}
-    {% endif %}
-
-    <form class="mb-3" method="post" action="{% url 'login' %}">
-      {% csrf_token %}
-      <p>{{ form.username }}</p>
-      <p>{{ form.password }}</p>
-      <input class="btn btn-dark" type="submit" value="Login"/>
-      <input type="hidden" name="next" value="{% if next == '/accounts/logout' %}/{% else %}{{next}}{% endif %}"/>
-    </form>
-
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+      {% endif %}
+      <form class="mb-3" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <p>{{ form.username }}</p>
+        <p>{{ form.password }}</p>
+        <input class="btn btn-dark" type="submit" value="Login" />
+        <input type="hidden"
+               name="next"
+               value="{% if next == '/accounts/logout' %}/{% else %}{{ next }}{% endif %}" />
+      </form>
+      <p>
+        <a href="{% url 'password_reset' %}">Lost password?</a>
+      </p>
+    </div>
   </div>
-</div>
 {% endblock %}

@@ -1,68 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-<div class="container my-3">
-
-  {% if messages %}
-  {% for message in messages %}
-  <p class="my-2 text-success">{{message}}</p>
-  {% endfor %}
-  {% endif %}
-
-  <h1 class="my-2">Notes for {{entry.name}}</h1>
-
-  <div class="d-flex flex-column flex-lg-row gap-3 w-100">
-    <a href="#edit_note" class="d-block d-lg-none btn btn-dark my-2">Add new note</a>
-    <div class="col-12 col-lg-8">
-      <table class="table table-hover">
-        <thead class="hide-on-xsmall">
-          <tr>
-            <th scope="col">Note</th>
-            <th scope="col">Created at (UTC)</th>
-            <th scope="col">Options</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% if notes %}
-          {% for note in notes %}
-          <tr>
-            <td class="col-7">
-              {{note.text}}
-            </td>
-            <td class="hide-on-xsmall col-4">
-              {{note.created_at}}
-            </td>
-            <td class="col-1">
-              <div class="d-flex flex-column flex-sm-row gap-3">
-                <a href="{% url 'edit_note' note.id %}#edit_note" title="Edit this note">
-                  <i class="fa-regular fa-pen-to-square text-secondary"></i>
-                </a>
-                <a href="{% url 'delete_note' note.id %}">
-                  <i class="fa-regular fa-trash-can text-secondary" title="Delete this note"></i>
-                </a>
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
+  <div class="container my-3">
+    {% if messages %}
+      {% for message in messages %}<p class="my-2 text-success">{{ message }}</p>{% endfor %}
+    {% endif %}
+    <h1 class="my-2">Notes for {{ entry.name }}</h1>
+    <div class="d-flex flex-column flex-lg-row gap-3 w-100">
+      <a href="#edit_note" class="d-block d-lg-none btn btn-dark my-2">Add new note</a>
+      <div class="col-12 col-lg-8">
+        <table class="table table-hover">
+          <thead class="hide-on-xsmall">
+            <tr>
+              <th scope="col">Note</th>
+              <th scope="col">Created at (UTC)</th>
+              <th scope="col">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if notes %}
+              {% for note in notes %}
+                <tr>
+                  <td class="col-7">{{ note.text }}</td>
+                  <td class="hide-on-xsmall col-4">{{ note.created_at }}</td>
+                  <td class="col-1">
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                      <a href="{% url 'edit_note' note.id %}#edit_note" title="Edit this note">
+                        <i class="fa-regular fa-pen-to-square text-secondary"></i>
+                      </a>
+                      <a href="{% url 'delete_note' note.id %}">
+                        <i class="fa-regular fa-trash-can text-secondary"
+                           title="Delete this note"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-lg-4 mb-5">
+        <form id="edit_note" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input class="btn btn-dark"
+                 type="submit"
+                 value="{% if form.text.value %}Edit note{% else %}Add note{% endif %}" />
+          {% if form.text.value %}
+            <a href='{% url "notes" entry.id %}' class="btn btn-secondary">Cancel</a>
           {% endif %}
-        </tbody>
-      </table>
-    </div>
-    <div class="col-12 col-lg-4 mb-5">
-      <form id="edit_note" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input 
-          class="btn btn-dark" 
-          type="submit" 
-          value="{% if form.text.value %}Edit note{% else %}Add note{% endif %}"
-        />
-        {% if form.text.value %}
-        <a href='{% url "notes" entry.id %}' class="btn btn-secondary">Cancel</a>
-        {% endif %}
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 {% endblock %}

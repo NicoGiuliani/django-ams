@@ -1,71 +1,70 @@
 {% extends "base.html" %}
 {% load static thumbnail %}
-
 {% block content %}
-
-<div class="container my-3">
-  <h1 class="my-2">Search Results</h1>
-
-  {% if entries|length == 0 %}
-  <h3 class="py-3">No results found.</h3>
-  {% else %}
-  <table class="table table-hover">
-    <thead class="">
-      <tr class="table">
-        <th scope="col">Name</th>
-        <th scope="col" class="hide-on-xsmall">Species</th>
-        <th scope="col" class="hide-on-xsmall">Scientific Name</th>
-        <th scope="col">Photo</th>
-        <th scope="col" class="hide-on-xsmall">Options</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {% for entry in entries %}
-      <div class="row-wrapper">
-      <tr class="table-light align-middle">
-        <th scope="row">
-          <a href="{% url 'entry' entry.id %}">
-          {{entry.name}}
-        </a>
-        </th>
-        <td class="hide-on-xsmall">{{entry.common_name}}</td>
-        <td class="hide-on-xsmall">{{entry.species}}</td>
-        <td>
-        {% if entry.photo %}
-          {% thumbnail entry.photo "500x500" crop="center" as im %}
-          <a href="{% url 'entry' entry.id %}">
-            <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
-          </a>
-          {% endthumbnail %}
-        {% else %}
-          <a href="{% url 'entry' entry.id %}">
-            <img class="zoom rounded" height="100px" width="100px" src="{% static 'images/default.jpg' %}" alt="" />
-          </a>
-        {% endif %}
-        </td>
-        <td class="hide-on-xsmall">
-          <div class="menu_options d-flex flex-row gap-3">
-            <a href="{% url 'edit' entry.id %}" title="Edit basic information">
-              <i class="fa-regular fa-pen-to-square text-secondary"></i>
-            </a>
-            <a href="{% url 'schedule' entry.id %}" title="Create or change a feeding schedule">
-              <i class="fa-regular fa-calendar text-secondary"></i>
-            </a>
-            <a href="{% url 'notes' entry.id %}" title="View notes">
-              <i class="fa-regular fa-note-sticky text-secondary"></i>
-            </a>
-            <a href="{% url 'delete' entry.id %}">
-              <i class="fa-regular fa-trash-can text-secondary" title="Delete this entry"></i>
-            </a>
+  <div class="container my-3">
+    <h1 class="my-2">Search Results</h1>
+    {% if entries|length == 0 %}
+      <h3 class="py-3">No results found.</h3>
+    {% else %}
+      <table class="table table-hover">
+        <thead class="">
+          <tr class="table">
+            <th scope="col">Name</th>
+            <th scope="col" class="hide-on-xsmall">Species</th>
+            <th scope="col" class="hide-on-xsmall">Scientific Name</th>
+            <th scope="col">Photo</th>
+            <th scope="col" class="hide-on-xsmall">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in entries %}
+            <div class="row-wrapper">
+              <tr class="table-light align-middle">
+                <th scope="row">
+                  <a href="{% url 'entry' entry.id %}">{{ entry.name }}</a>
+                </th>
+                <td class="hide-on-xsmall">{{ entry.common_name }}</td>
+                <td class="hide-on-xsmall">{{ entry.species }}</td>
+                <td>
+                  {% if entry.photo %}
+                    {% thumbnail entry.photo "500x500" crop="center" as im %}
+                    <a href="{% url 'entry' entry.id %}">
+                      <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
+                    </a>
+                  {% endthumbnail %}
+                {% else %}
+                  <a href="{% url 'entry' entry.id %}">
+                    <img class="zoom rounded"
+                         height="100px"
+                         width="100px"
+                         src="{% static 'images/default.jpg' %}"
+                         alt="" />
+                  </a>
+                {% endif %}
+              </td>
+              <td class="hide-on-xsmall">
+                <div class="menu_options d-flex flex-row gap-3">
+                  <a href="{% url 'edit' entry.id %}" title="Edit basic information">
+                    <i class="fa-regular fa-pen-to-square text-secondary"></i>
+                  </a>
+                  <a href="{% url 'schedule' entry.id %}"
+                     title="Create or change a feeding schedule">
+                    <i class="fa-regular fa-calendar text-secondary"></i>
+                  </a>
+                  <a href="{% url 'notes' entry.id %}" title="View notes">
+                    <i class="fa-regular fa-note-sticky text-secondary"></i>
+                  </a>
+                  <a href="{% url 'delete' entry.id %}">
+                    <i class="fa-regular fa-trash-can text-secondary"
+                       title="Delete this entry"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
           </div>
-        </td>
-      </tr>
-    </div>
-    {% endfor %}
-    </tbody>
-
-  </table>
-{% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 </div>
 {% endblock %}

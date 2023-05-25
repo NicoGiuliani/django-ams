@@ -3,43 +3,56 @@
     <a class="navbar-brand" href="{% url 'home' %}">
       <i class="logo p-1 fa-solid fa-feather-pointed fs-1"></i>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor02"
+            aria-controls="navbarColor02"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         {% if not request.user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">
-            Register
-          </a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
         {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create' %}">
-            <i class="fa fa-plus"></i>
-            New Entry
-          </a>
-        </li>
-        <li class="nav-item dropdown w-lg-100">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-solid fa-user"></i>
-            Logged in as {{request.user}}
-          </a>
-          <div class="dropdown-menu mb-3 mb-lg-0">
-            <a class="dropdown-item text-uppercase" href="{% url 'password_reset' %}">Change password</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>
-          </div>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'create' %}">
+              <i class="fa fa-plus"></i>
+              New Entry
+            </a>
+          </li>
+          <li class="nav-item dropdown w-lg-100">
+            <a class="nav-link dropdown-toggle"
+               data-bs-toggle="dropdown"
+               href="#"
+               role="button"
+               aria-haspopup="true"
+               aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+              Logged in as {{ request.user }}
+            </a>
+            <div class="dropdown-menu mb-3 mb-lg-0">
+              <a class="dropdown-item text-uppercase"
+                 href="{% url 'password_reset' %}">Change password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>
+            </div>
+          </li>
         {% endif %}
       </ul>
       {% if request.user.is_authenticated %}
-      <form class="d-flex" action="{% url 'search' %}" method="GET" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input class="form-control me-2 rounded" type="search" name="query">
-        <button class="btn btn-secondary rounded" type="submit">Search</button>
-      </form>
+        <form class="d-flex"
+              action="{% url 'search' %}"
+              method="GET"
+              enctype="multipart/form-data">
+          {% csrf_token %}
+          <input class="form-control me-2 rounded" type="search" name="query">
+          <button class="btn btn-secondary rounded" type="submit">Search</button>
+        </form>
       {% endif %}
     </div>
   </div>
