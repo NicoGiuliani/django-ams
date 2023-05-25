@@ -1,53 +1,7 @@
 {% extends "base.html" %}
 {% load static thumbnail %}
 {% block content %}
-<style>
-  .content {
-    flex-direction: row; 
-    justify-content: space-between;
-  }
 
-  @media (max-width: 992px) {
-    .content {
-    flex-direction: column; 
-    /* justify-content: space-between; */
-    }
-    .info {
-      padding: 0 !important;
-    }
-    .photo {
-      margin: 0 auto;
-    }
-    .menu_options {
-      width: fit-content;
-    }
-  }
-
-  @media (max-width: 524px) {
-    .photo {
-      width: 351px;
-    }
-    .back-btn {
-      display: none !important;
-    }
-  }
-
-  @media (max-width: 280px) {
-    .photo {
-      width: 256px;
-    }
-    .row-header {
-      font-size: 0.75rem !important;
-    }
-    .row-data {
-      font-size: 0.7rem;
-    }
-  }
-</style>
-
-<!-- <div class="w-100 back-btn">
-  <a href="{% url 'home' %}" class="btn btn-light mt-3 ms-3">Back</a>
-</div> -->
 <div class="container my-3">
   {% if messages %}
   {% for message in messages %}
@@ -55,22 +9,22 @@
   {% endfor %}
   {% endif %}
   <h1 class="my-2">{{entry.name}}</h1>
-  <div class="content" style="display: flex; text-align: left;">
+  <div class="d-flex flex-column flex-lg-row">
 
     <div>
       {% if entry.photo %}
       {% thumbnail entry.photo "500x500" crop="center" as im %}
-      <img class="photo rounded" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
+      <img class="mx-lg-auto photo rounded" src="{{im.url}}" style="box-shadow: 5px 5px 20px #999;" alt=""/>
       {% endthumbnail %}
       {% else %}
-      <img class="photo rounded" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
+      <img class="photo mx-lg-auto rounded" height="500px" width="500px" src="{% static 'images/default.jpg' %}" style="box-shadow: 5px 5px 20px #999;" alt="" />
       {% endif %} 
       <table class="table w-100">
         <tbody>
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Options</th>
-            <td class="row-data">
-              <div class="menu_options d-flex flex-row gap-3 justify-content-end">
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Options</th>
+            <td class="font-on-xsmall">
+              <div class="justify-content-end ms-auto d-flex flex-row gap-3">
                 <a href="{% url 'edit' entry.id %}" title="Edit basic information">
                   <i class="fa-regular fa-pen-to-square text-secondary"></i>
                 </a>
@@ -90,29 +44,29 @@
       </table>
     </div>
 
-    <div class="info px-5 w-100">
+    <div class="px-0 px-lg-5 w-100">
       <table class="table table-hover">
         <tbody>
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Common name</th>
-            <td class="row-data text-break">{{entry.common_name}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Common name</th>
+            <td class="font-on-xsmall text-break font-on-xsmall">{{entry.common_name}}</td>
           </tr>
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Species</th>
-            <td class="row-data text-break">{{entry.species}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall" >Species</th>
+            <td class="font-on-xsmall text-break font-on-xsmall">{{entry.species}}</td>
           </tr>
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Date acquired</th>
-            <td class="row-data text-break">{{entry.date_acquired}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Date acquired</th>
+            <td class="font-on-xsmall text-break font-on-xsmall">{{entry.date_acquired}}</td>
           </tr>
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem;">Acquired from</th>
-            <td class="row-data text-break">{{entry.acquired_from}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Acquired from</th>
+            <td class="font-on-xsmall text-break">{{entry.acquired_from}}</td>
           </tr>
           {% if feeding_schedule.food_type %}
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Food type</th>
-            <td class="row-data">
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Food type</th>
+            <td class="font-on-xsmall">
               {{feeding_schedule.food_type}} 
               {% if feeding_schedule.food_quantity %}
                 (x{{feeding_schedule.food_quantity}})
@@ -122,14 +76,14 @@
           {% endif %}
           {% if feeding_schedule.last_fed_date %}
           <tr class="table-light align-middle">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Last fed date</th>
-            <td class="row-data">{{feeding_schedule.last_fed_date}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall">Last fed date</th>
+            <td class="font-on-xsmall">{{feeding_schedule.last_fed_date}}</td>
           </tr>
           {% endif %}
           {% if feeding_schedule.next_feed_date %}
           <tr class="table-light align-middle" style="border-bottom-style: hidden">
-            <th scope="row" class="col-6 row-header" style="font-size: 1.2rem">Next feed date</th>
-            <td class="row-data">{{feeding_schedule.next_feed_date}}</td>
+            <th scope="row" class="col-6 entry-header font-on-xsmall" >Next feed date</th>
+            <td class="font-on-xsmall">{{feeding_schedule.next_feed_date}}</td>
           </tr>
           {% endif %}
         </tbody>

@@ -2,18 +2,6 @@
 {% load static %}
 {% block content %}
 
-<style>
-    @media (max-width: 524px) {
-    .back-btn {
-      display: none !important;
-    }
-  }
-</style>
-
-<!-- <div class="w-100 back-btn">
-  <a href="{% url 'entry' entry.id %}" class="btn btn-light mt-3 ms-3">Back</a>
-</div> -->
-
 <div class="container my-3">
   {% if messages %}
   {% for message in messages %}

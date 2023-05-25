@@ -2,37 +2,7 @@
 {% load static thumbnail %}
 
 {% block content %}
-<style>
-  .zoom {
-    transition: transform .2s;
-  }
 
-  .zoom:hover {
-    transform: scale(1.5);
-  }
-
-  .link {
-    padding: 15px;
-  }
-
-  @media (max-width: 992px) {
-    .test {
-      display: none
-    }
-  }
-
-  @media (max-width: 642px) {
-    .additional_fields {
-      display: none;
-    }
-  }
-
-  @media (max-width: 352px) { 
-    .species {
-      display: none;
-    }
-  }
-</style>
 {% if messages %}
 {% for message in messages %}
 <div class="container p-2">
@@ -40,60 +10,62 @@
 </div>
 {% endfor %}
 {% endif %}
+
 <table class="table table-hover">
   <thead>
     <tr class="table">
       <th scope="col">Name</th>
-      <th scope="col" class="species">Species</th>
-      <th scope="col" class="additional_fields">Scientific Name</th>
+      <th scope="col" class="hide-on-small">Species</th>
+      <th scope="col" class="hide-on-medium">Scientific Name</th>
       <th scope="col">Photo</th>
-      <th scope="col" class="additional_fields">Options</th>
+      <th scope="col" class="hide-on-medium">Options</th>
     </tr>
   </thead>
 
   <tbody>
   {% for entry in entries %}
-  <div class="row-wrapper">
-    <tr class="table-light align-middle">
-      <th scope="row">
-        <a href="{% url 'entry' entry.id %}">
-        {{entry.name}}
-        </a>
-      </th>
-      <td class="species">{{entry.common_name}}</td>
-      <td class="additional_fields">{{entry.species}}</td>
-      <td>
-      
-      {% if entry.photo %}
+    <div class="row-wrapper">
+      <tr class="table-light align-middle">
+        <th scope="row">
+          <a href="{% url 'entry' entry.id %}">
+          {{entry.name}}
+          </a>
+        </th>
+        <td class="hide-on-small">{{entry.common_name}}</td>
+        <td class="hide-on-medium">{{entry.species}}</td>
+
+        <td>
+        {% if entry.photo %}
         {% thumbnail entry.photo "500x500" crop="center" as im %}
-        <a href="{% url 'entry' entry.id %}">
-          <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
-        </a>
+          <a href="{% url 'entry' entry.id %}">
+            <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
+          </a>
         {% endthumbnail %}
         {% else %}
-        <a href="{% url 'entry' entry.id %}">
-          <img class="zoom rounded" height="100px" width="100px" src="{% static 'images/default.jpg' %}" alt="" />
-        </a>
-      {% endif %}
-      </td>
-      <td class="additional_fields">
-        <div class="menu_options d-flex flex-row gap-3">
-          <a href="{% url 'edit' entry.id %}" title="Edit basic information">
-            <i class="fa-regular fa-pen-to-square text-secondary"></i>
+          <a href="{% url 'entry' entry.id %}">
+            <img class="zoom rounded" height="100px" width="100px" src="{% static 'images/default.jpg' %}" alt="" />
           </a>
-          <a href="{% url 'schedule' entry.id %}" title="Create or change a feeding schedule">
-            <i class="fa-regular fa-calendar text-secondary"></i>
-          </a>
-          <a href="{% url 'notes' entry.id %}" title="View notes">
-            <i class="fa-regular fa-note-sticky text-secondary"></i>
-          </a>
-          <a href="{% url 'delete' entry.id %}">
-            <i class="fa-regular fa-trash-can text-secondary" title="Delete this entry"></i>
-          </a>
-        </div>
-      </td>
-    </tr>
-  </div>
+        {% endif %}
+        </td>
+
+        <td class="hide-on-medium">
+          <div class="menu_options d-flex flex-row gap-3">
+            <a href="{% url 'edit' entry.id %}" title="Edit basic information">
+              <i class="fa-regular fa-pen-to-square text-secondary"></i>
+            </a>
+            <a href="{% url 'schedule' entry.id %}" title="Create or change a feeding schedule">
+              <i class="fa-regular fa-calendar text-secondary"></i>
+            </a>
+            <a href="{% url 'notes' entry.id %}" title="View notes">
+              <i class="fa-regular fa-note-sticky text-secondary"></i>
+            </a>
+            <a href="{% url 'delete' entry.id %}">
+              <i class="fa-regular fa-trash-can text-secondary" title="Delete this entry"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </div>
   {% endfor %}
   </tbody>
 </table>

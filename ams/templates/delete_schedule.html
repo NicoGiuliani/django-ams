@@ -2,27 +2,6 @@
 {% load static thumbnail %}
 {% block content %}
 
-<style>
-@media (max-width: 524px) {
-    .photo {
-      width: 351px;
-    }
-    .back-btn {
-      display: none !important;
-    }
-  }
-
-  @media (max-width: 280px) {
-    .photo {
-      width: 256px;
-    }
-  }
-</style>
-
-
-<!-- <div class="w-100 back-btn">
-  <a href="{% url 'home' %}" class="btn btn-light mt-3 ms-3">Back</a>
-</div> -->
 <div class="container my-3 d-flex flex-column text-center">
   <div class="delete-preview mb-5">
     <h1 class="my-2">Feeding schedule for {{entry.name}}</h1>

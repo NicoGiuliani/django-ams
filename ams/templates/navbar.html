@@ -1,22 +1,3 @@
-<style>
-  i.logo:hover {
-    /* color: linear-gradient(black, orange); */
-    text-shadow: 0 0 30px white;
-    /* background: -webkit-linear-gradient(90deg, white, lightgreen); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
-  }
-
-  @media (max-width: 992px) {
-    .dropdown {
-      width: 100%;
-    }
-    .dropdown-menu {
-      margin-bottom: 20px;
-    }
-  }
-</style>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid mx-3">
     <a class="navbar-brand" href="{% url 'home' %}">
@@ -40,13 +21,12 @@
             New Entry
           </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown w-lg-100">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="fa-solid fa-user"></i>
-            <!-- {{request.user}} -->
             Logged in as {{request.user}}
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu mb-3 mb-lg-0">
             <a class="dropdown-item text-uppercase" href="{% url 'password_reset' %}">Change password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-uppercase" href="{% url 'logout' %}">Logout</a>

@@ -9,6 +9,7 @@ from .models import Entry, FeedingSchedule, Note
 from .forms import CreateForm, NoteForm, ScheduleForm, RegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.utils import timezone
 from sorl import thumbnail
 
 
@@ -48,7 +49,6 @@ def entry(request, id):
         feeding_schedule = FeedingSchedule.objects.filter(belongs_to=entry)
         if len(feeding_schedule) > 0:
             feeding_schedule = feeding_schedule[0]
-        # print(feeding_schedule)
         return render(
             request,
             "entry.html",
@@ -76,7 +76,7 @@ def notes(request, id, notes=None):
                 text=new_text,
             )
             new_note.save()
-            return redirect("notes", id)
+            return redirect("{}#".format(reverse("notes", kwargs={"id": id})))
     else:
         try:
             entry = Entry.objects.filter(owner=request.user).get(pk=id)
@@ -156,11 +156,12 @@ def edit_note(request, id):
         form = NoteForm(request.POST)
         if form.is_valid():
             new_text = form.cleaned_data["text"]
-            new_created_at = datetime.datetime.now()
+            new_created_at = timezone.make_aware(datetime.datetime.now())
             noteQueryObject.update(text=new_text, created_at=new_created_at)
-            return redirect("notes", entry.id)
+            return redirect("{}#".format(reverse("notes", kwargs={"id": entry.id})))
     else:
         form = None
+        print("request:", request.path)
         if request.user == entry.owner:
             form = NoteForm(
                 instance=note,

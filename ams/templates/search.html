@@ -2,47 +2,6 @@
 {% load static thumbnail %}
 
 {% block content %}
-<style>
-  .zoom {
-    transition: transform .2s;
-  }
-
-  .zoom:hover {
-    transform: scale(1.5);
-  }
-
-  .link {
-    padding: 15px;
-  }
-
-
-
-  @media (max-width: 992px) {
-
-  }
-
-  @media (max-width: 524px) {
-    .back-btn {
-      display: none !important;
-    }
-  }
-
-  @media (max-width: 280px) {
-      .large {
-        display: none;
-      }
-      .menu_options {
-        flex-direction: column !important;
-      }
-      .small {
-        display: block;
-      }
-    }
-</style>
-
-<!-- <div class="w-100">
-  <a href="{% url 'home' %}" class="btn back-btn btn-light mt-3 ms-3">Back</a>
-</div> -->
 
 <div class="container my-3">
   <h1 class="my-2">Search Results</h1>
@@ -54,10 +13,10 @@
     <thead class="">
       <tr class="table">
         <th scope="col">Name</th>
-        <th scope="col" class="large">Species</th>
-        <th scope="col" class="large">Scientific Name</th>
+        <th scope="col" class="hide-on-xsmall">Species</th>
+        <th scope="col" class="hide-on-xsmall">Scientific Name</th>
         <th scope="col">Photo</th>
-        <th scope="col" class="large">Options</th>
+        <th scope="col" class="hide-on-xsmall">Options</th>
       </tr>
     </thead>
 
@@ -70,8 +29,8 @@
           {{entry.name}}
         </a>
         </th>
-        <td class="large">{{entry.common_name}}</td>
-        <td class="large">{{entry.species}}</td>
+        <td class="hide-on-xsmall">{{entry.common_name}}</td>
+        <td class="hide-on-xsmall">{{entry.species}}</td>
         <td>
         {% if entry.photo %}
           {% thumbnail entry.photo "500x500" crop="center" as im %}
@@ -85,7 +44,7 @@
           </a>
         {% endif %}
         </td>
-        <td class="large">
+        <td class="hide-on-xsmall">
           <div class="menu_options d-flex flex-row gap-3">
             <a href="{% url 'edit' entry.id %}" title="Edit basic information">
               <i class="fa-regular fa-pen-to-square text-secondary"></i>
