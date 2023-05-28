@@ -46,8 +46,16 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "app.apps.AppConfig",
+    'cloudinary_storage',
+    'cloudinary',
     "sorl.thumbnail",
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': "deegr9tcm",
+    'API_KEY': "275343156438685",
+    'API_SECRET': "6bLIifGYo0-6bSu9ddzEu1iPruI",
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -67,9 +75,6 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549",
-        "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient"
-            },
     }
 }
 
@@ -131,9 +136,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-MEDIA_ROOT = BASE_DIR / "media"
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
+MEDIA_URL = '/ams/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
+
+# MEDIA_URL = "/media/"
 
 TIME_ZONE = "UTC"
 
