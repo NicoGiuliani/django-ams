@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load static thumbnail %}
 {% block content %}
-  <div class="container my-3">
-    <h1 class="my-2">Search Results</h1>
+  <div class="my-3">
+    <div class="container">
+      <h1 class="my-2">Search Results for "{{query}}"</h1>
+    </div>
     {% if entries|length == 0 %}
       <h3 class="py-3">No results found.</h3>
     {% else %}
@@ -11,9 +13,9 @@
           <tr class="table">
             <th scope="col">Name</th>
             <th scope="col" class="hide-on-xsmall">Species</th>
-            <th scope="col" class="hide-on-xsmall">Scientific Name</th>
+            <th scope="col" class="hide-on-medium">Scientific Name</th>
             <th scope="col">Photo</th>
-            <th scope="col" class="hide-on-xsmall">Options</th>
+            <th scope="col" class="hide-on-medium">Options</th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +25,7 @@
                 <th scope="row">
                   <a href="{% url 'entry' entry.id %}">{{ entry.name }}</a>
                 </th>
-                <td class="hide-on-xsmall">{{ entry.common_name }}</td>
+                <td class="hide-on-medium">{{ entry.common_name }}</td>
                 <td class="hide-on-xsmall">{{ entry.species }}</td>
                 <td>
                   {% if entry.photo %}
@@ -42,7 +44,7 @@
                   </a>
                 {% endif %}
               </td>
-              <td class="hide-on-xsmall">
+              <td class="hide-on-medium">
                 <div class="menu_options d-flex flex-row gap-3">
                   <a href="{% url 'edit' entry.id %}" title="Edit basic information">
                     <i class="fa-regular fa-pen-to-square text-secondary"></i>

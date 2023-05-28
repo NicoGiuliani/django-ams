@@ -10,17 +10,15 @@
       <div>
         {% if entry.photo %}
           {% thumbnail entry.photo "500x500" crop="center" as im %}
-          <img class="mx-lg-auto photo rounded"
+          <img class="mx-lg-auto photo rounded drop-shadow"
                src="{{ im.url }}"
-               style="box-shadow: 5px 5px 20px #999"
                alt="" />
         {% endthumbnail %}
       {% else %}
-        <img class="photo mx-lg-auto rounded"
+        <img class="photo mx-lg-auto rounded drop-shadow"
              height="500px"
              width="500px"
              src="{% static 'images/default.jpg' %}"
-             style="box-shadow: 5px 5px 20px #999"
              alt="" />
       {% endif %}
       <table class="table w-100">
@@ -84,7 +82,7 @@
             </tr>
           {% endif %}
           {% if feeding_schedule.next_feed_date %}
-            <tr class="table-light align-middle" style="border-bottom-style: hidden">
+            <tr class="table-light align-middle no-bottom-border">
               <th scope="row" class="col-6 entry-header font-on-xsmall">Next feed date</th>
               <td class="font-on-xsmall">{{ feeding_schedule.next_feed_date }}</td>
             </tr>

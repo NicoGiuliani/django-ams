@@ -235,7 +235,9 @@ def search(request):
                 | Q(date_acquired__icontains=query)
             )
         )
-        return render(request, "search.html", {"entries": search_results})
+        return render(
+            request, "search.html", {"entries": search_results, "query": query}
+        )
 
 
 @login_required
