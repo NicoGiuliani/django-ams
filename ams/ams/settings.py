@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://django-ams-production.up.railway.app/']
+    CSRF_TRUSTED_ORIGINS = ['https://django-ams-production.up.railway.app']
 
 ALLOWED_HOSTS = ["*"]
 
