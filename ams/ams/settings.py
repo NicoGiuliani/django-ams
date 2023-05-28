@@ -72,7 +72,7 @@ ROOT_URLCONF = "ams.urls"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "https://django-ams-production.up.railway.app",
+        "LOCATION": "127.0.0.1:11211",
     }
 }
 
