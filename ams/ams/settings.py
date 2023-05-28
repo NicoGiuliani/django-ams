@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 THUMBNAIL_REDIS_DB = 0  # the default
 THUMBNAIL_REDIS_HOST = 'containers-us-west-51.railway.app'
-THUMBNAIL_REDIS_PORT = 7404  # the default
+THUMBNAIL_REDIS_PORT = "7404"  # the default
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -72,7 +72,7 @@ ROOT_URLCONF = "ams.urls"
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "redis://default:RM6zsN6WeEOhJrn1f0n6@containers-us-west-51.railway.app:7404",
+        "LOCATION": "https://django-ams-production.up.railway.app",
     }
 }
 
