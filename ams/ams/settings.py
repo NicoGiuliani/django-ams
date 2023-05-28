@@ -128,9 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-# MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549" / "media"
 
-# MEDIA_URL = "/media/"
+MEDIA_URL = "/media/"
 
 TIME_ZONE = "UTC"
 
