@@ -69,6 +69,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "ams.urls"
 
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
+        "LOCATION": "redis://default:RM6zsN6WeEOhJrn1f0n6@containers-us-west-51.railway.app:7404",
+    }
+}
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
