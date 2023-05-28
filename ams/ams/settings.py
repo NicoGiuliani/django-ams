@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from dotenv import load_dotenv
-import os
+import os, cloudinary, cloudinary_storage
 from pathlib import Path
 
 load_dotenv()
