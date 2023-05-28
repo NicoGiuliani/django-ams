@@ -128,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-MEDIA_ROOT = "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549" / "media"
+MEDIA_ROOT = "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549"
 
 MEDIA_URL = "/media/"
 
