@@ -65,11 +65,8 @@ ROOT_URLCONF = "ams.urls"
 
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
     }
 }
 
