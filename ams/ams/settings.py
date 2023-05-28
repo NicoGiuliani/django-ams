@@ -67,6 +67,9 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "LOCATION": "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549",
+        "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient"
+            },
     }
 }
 
@@ -128,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-MEDIA_ROOT = "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549"
+MEDIA_ROOT = BASE_DIR / "media"
 
 MEDIA_URL = "/media/"
 
