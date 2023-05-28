@@ -49,12 +49,6 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
 ]
 
-# THUMBNAIL_DEBUG = True
-THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
-THUMBNAIL_REDIS_DB = 0  # the default
-THUMBNAIL_REDIS_HOST = 'containers-us-west-51.railway.app'
-THUMBNAIL_REDIS_PORT = "7404"  # the default
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -71,8 +65,8 @@ ROOT_URLCONF = "ams.urls"
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549",
     }
 }
 
