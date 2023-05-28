@@ -35,12 +35,14 @@
 @media (max-width: 524px) {
   .photo {
     width: 351px;
+    height: 351px;
   }
 }
 
 @media (max-width: 375px) {
   .photo {
     width: 256px;
+    height: 256px;
   }
 }
 
@@ -62,5 +64,3 @@
     font-size: 0.75rem !important;
   }
 }
-
-@media (max-width: 310px) {}
