@@ -121,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = BASE_DIR / "/media/"
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 
 TIME_ZONE = "UTC"
 
