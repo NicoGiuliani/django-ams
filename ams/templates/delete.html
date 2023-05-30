@@ -5,11 +5,11 @@
     <div class="delete-preview mb-5">
       <h1 class="my-2">{{ entry.name }}</h1>
       {% if entry.photo %}
-        {% thumbnail entry.photo "500x500" crop="center" as im %}
         <img class="rounded mx-lg-auto photo drop-shadow"
              src="{{ im.url }}"
+             height="500px"
+             width="500px"
              alt="" />
-      {% endthumbnail %}
     {% else %}
       <img class="rounded mx-lg-auto photo drop-shadow"
            height="500px"

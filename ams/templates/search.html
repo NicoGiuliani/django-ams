@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load static thumbnail %}
 {% block content %}
   <div class="my-3">
     <div class="container">
@@ -29,12 +28,10 @@
                 <td class="hide-on-xsmall">{{ entry.species }}</td>
                 <td>
                   {% if entry.photo %}
-                    {% thumbnail entry.photo "500x500" crop="center" as im %}
                     <a href="{% url 'entry' entry.id %}">
                       <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
                     </a>
-                  {% endthumbnail %}
-                {% else %}
+                  {% else %}
                   <a href="{% url 'entry' entry.id %}">
                     <img class="zoom rounded"
                          height="100px"
@@ -42,7 +39,7 @@
                          src="{% static 'images/default.jpg' %}"
                          alt="" />
                   </a>
-                {% endif %}
+                  {% endif %}
               </td>
               <td class="hide-on-medium">
                 <div class="menu_options d-flex flex-row gap-3">

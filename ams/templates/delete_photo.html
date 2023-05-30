@@ -1,15 +1,14 @@
 {% extends "base.html" %}
-{% load static thumbnail %}
 {% block content %}
   <div class="container my-3 d-flex flex-column text-center">
     <div class="delete-preview mb-5">
       <h1 class="my-2">Photo for {{ entry.name }}</h1>
       {% if entry.photo %}
-        {% thumbnail entry.photo "500x500" crop="center" as im %}
         <img class="rounded photo drop-shadow"
              src="{{ im.url }}"
+             height="500px"
+             width="500px"
              alt="" />
-      {% endthumbnail %}
     {% else %}
       <img class="rounded photo drop-shadow"
            height="500px"
