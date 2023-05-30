@@ -6,7 +6,7 @@
       <h1 class="my-2">{{ entry.name }}</h1>
       {% if entry.photo %}
         <img class="rounded mx-lg-auto photo drop-shadow"
-             src="{{ im.url }}"
+             src="{{ entry.photo.url }}"
              height="500px"
              width="500px"
              alt="" />

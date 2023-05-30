@@ -5,7 +5,7 @@
       <h1 class="my-2">Feeding schedule for {{ entry.name }}</h1>
       {% if entry.photo %}
         <img class="rounded photo drop-shadow"
-             src="{{ im.url }}"
+             src="{{ entry.photo.url }}"
              height="500px"
              width="500px"
              alt="" />

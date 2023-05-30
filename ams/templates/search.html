@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static thumbnail %}
 {% block content %}
   <div class="my-3">
     <div class="container">
@@ -29,7 +30,7 @@
                 <td>
                   {% if entry.photo %}
                     <a href="{% url 'entry' entry.id %}">
-                      <img class="zoom rounded" src="{{ im.url }}" width="100px" height="100px" />
+                      <img class="zoom rounded" src="{{ entry.photo.url }}" width="100px" height="100px" />
                     </a>
                   {% else %}
                   <a href="{% url 'entry' entry.id %}">
