@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from dotenv import load_dotenv
-import os, cloudinary, cloudinary_storage
+import os
 from pathlib import Path
 
 load_dotenv()
@@ -70,13 +70,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "ams.urls"
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://default:RLqRENND2HHCJ8vciHjc@containers-us-west-135.railway.app:6549",
-    }
-}
 
 TEMPLATES = [
     {
@@ -137,12 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
-MEDIA_URL = '/ams/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-# MEDIA_ROOT = BASE_DIR / "media"
-
-# MEDIA_URL = "/media/"
+# MEDIA_URL = '/ams/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 TIME_ZONE = "UTC"
 

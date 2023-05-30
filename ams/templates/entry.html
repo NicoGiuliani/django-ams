@@ -9,11 +9,11 @@
     <div class="d-flex flex-column flex-lg-row">
       <div>
         {% if entry.photo %}
-          {% thumbnail entry.photo "500x500" crop="center" as im %}
           <img class="mx-lg-auto photo rounded drop-shadow"
-               src="{{ im.url }}"
+               src="{{ entry.photo.url }}"
+               height="500px"
+               width="500px"
                alt="" />
-        {% endthumbnail %}
       {% else %}
         <img class="photo mx-lg-auto rounded drop-shadow"
              height="500px"

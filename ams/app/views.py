@@ -22,10 +22,8 @@ def home(request):
 def register(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
-        # print(form)
         if form.is_valid():
             new_user = form.save()
-            print(new_user)
             messages.info(request, "Thanks for registering. You are now logged in.")
             new_user = authenticate(
                 username=form.cleaned_data["username"],
@@ -35,7 +33,6 @@ def register(request):
             login(request, new_user)
             return redirect("home")
         else:
-            print(form.errors)
             return render(request, "register.html", {"form": form})
 
     return render(request, "register.html", {"form": RegistrationForm})
@@ -43,7 +40,6 @@ def register(request):
 
 @login_required
 def entry(request, id):
-    print(f"The ID for this page is {id}")
     try:
         entry = Entry.objects.filter(owner=request.user).get(pk=id)
         feeding_schedule = FeedingSchedule.objects.filter(belongs_to=entry)
@@ -55,7 +51,6 @@ def entry(request, id):
             {"entry": entry, "feeding_schedule": feeding_schedule},
         )
     except:
-        print("Entry not found")
         messages.info(request, "Entry not found")
         return redirect("home")
 
@@ -87,7 +82,6 @@ def notes(request, id, notes=None):
                 {"entry": entry, "notes": notes, "form": NoteForm},
             )
         except:
-            print("Something went wrong")
             return redirect("home")
 
 
@@ -97,10 +91,8 @@ def edit(request, id):
         entry = Entry.objects.filter(owner=request.user).get(pk=id)
         hasPhoto = entry.photo
         if request.method == "POST":
-            print("POST")
             form = CreateForm(request.POST, request.FILES, instance=entry)
             if form.is_valid():
-                print("IT'S VALID")
                 form.save()
                 return redirect("entry", id)
         else:
@@ -117,7 +109,6 @@ def edit(request, id):
                 {"form": form, "id": id, "hasPhoto": hasPhoto},
             )
     except:
-        print("Entry not found")
         return redirect("home")
 
 
@@ -161,7 +152,6 @@ def edit_note(request, id):
             return redirect("{}#".format(reverse("notes", kwargs={"id": entry.id})))
     else:
         form = None
-        print("request:", request.path)
         if request.user == entry.owner:
             form = NoteForm(
                 instance=note,
@@ -184,11 +174,8 @@ def delete_note(request, id):
 @login_required
 def create(request):
     if request.method == "POST":
-        print("POST")
         form = CreateForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
-            print("IT'S VALID")
             new_name = form.cleaned_data["name"]
             new_common_name = form.cleaned_data["common_name"]
             new_species = form.cleaned_data["species"]
@@ -208,14 +195,8 @@ def create(request):
                 acquired_from=new_acquired_from,
             )
             new_entry.save()
-            # messages.success(request, "Entry has been saved successfully")
-            print("IT'S BEEN SAVED")
             return redirect("home")
-            # return render(
-            #     request, "create_form.html", {"form": CreateForm, "success": True}
-            # )
     else:
-        print("GET")
         form = CreateForm()
     return render(request, "create_form.html", {"form": CreateForm})
 
@@ -224,7 +205,6 @@ def create(request):
 def search(request):
     if "query" in request.GET:
         query = request.GET["query"]
-        print(request.user)
         search_results = Entry.objects.filter(
             Q(owner=request.user)
             & (
@@ -243,14 +223,11 @@ def search(request):
 @login_required
 def schedule(request, id):
     if request.method == "POST":
-        print("POST")
         form = ScheduleForm(request.POST)
         if form.is_valid():
-            print("IT'S VALID")
             try:
                 entry = Entry.objects.filter(owner=request.user).get(pk=id)
             except:
-                print("Something didn't work")
                 return redirect("home")
 
             new_food_type = form.cleaned_data["food_type"]
@@ -274,7 +251,6 @@ def schedule(request, id):
                     next_feed_date=new_next_feed_date,
                 )
                 messages.success(request, "Schedule has been updated")
-                print("updated")
             else:
                 new_feeding_schedule = FeedingSchedule(
                     belongs_to=entry,
@@ -286,15 +262,12 @@ def schedule(request, id):
                 )
                 new_feeding_schedule.save()
                 messages.success(request, "Schedule has been saved successfully")
-                print("IT'S BEEN SAVED")
             return redirect("entry", id)
     else:
-        print("GET")
         form = ScheduleForm
         try:
             entry = Entry.objects.filter(owner=request.user).get(pk=id)
         except:
-            print("Something didn't work")
             return redirect("home")
         feeding_schedule = FeedingSchedule.objects.filter(belongs_to=entry)
         if len(feeding_schedule) > 0:
@@ -322,7 +295,7 @@ def delete_schedule(request, id):
             feeding_schedule.delete()
             messages.success(request, "Feeding schedule has been deleted")
         except:
-            print("Schedule not found")
+            print("An error has occurred")
         return redirect("entry", id=id)
     else:
         return render(request, "delete_schedule.html", {"entry": entry})
